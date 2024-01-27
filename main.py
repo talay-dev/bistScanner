@@ -12,7 +12,6 @@ def is_today_working_day():
     cal = Turkey()
     return cal.is_working_day(date.today())
 
-
 load_dotenv()
 fetcher = StockDataFetcher()
 bot = telebot.TeleBot(os.getenv("API_KEY"))
@@ -30,9 +29,10 @@ def scheduled_job():
         
 @bot.message_handler(commands=['help'])
 def send_welcome(message):
+    print(message.chat.id)
     bot.reply_to(message, "Merhaba, bu bot sana her akşam saat 8'de BİST'de goldencross'a başlayan hisseleri gösterir.")
-#TODO: Befor upload to server change time to 20:00
-schedule.every().minute.do(scheduled_job)
+
+schedule.every().day.at("20:00").do(scheduled_job)
 
 def start_pooling():
     while True:
