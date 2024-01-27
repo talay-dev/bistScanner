@@ -1,0 +1,5 @@
+pyTelegramBotAPI==4.15.3
+python-dotenv==1.0.1
+Requests==2.31.0
+schedule==1.2.1
+workalendar==17.0.0
