@@ -32,7 +32,7 @@ def send_welcome(message):
     print(message.chat.id)
     bot.reply_to(message, "Merhaba, bu bot sana her akşam saat 8'de BİST'de goldencross'a başlayan hisseleri gösterir.")
 
-schedule.every().day.at("20:00").do(scheduled_job)
+schedule.every().day.at("16:00").do(scheduled_job)
 
 def start_pooling():
     while True:
