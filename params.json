@@ -42,7 +42,7 @@
       "lang": "en"
     },
     "markets": [
-      "turkey"
+      "turkey", "america"
     ],
     "symbols": {
       "query": {
@@ -83,3 +83,6 @@
       150
     ]
   }
+
+
+
