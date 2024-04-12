@@ -1,3 +1,4 @@
+from email import message
 import time
 import telebot
 import os 
@@ -22,9 +23,13 @@ def scheduled_job():
         return
     current_date = time.strftime("%d/%m/%Y")
     stock_names = fetcher.fetch_data()
-    bot.send_message(os.getenv("CHAT_ID"), current_date)
+    Stock_Number = len(stock_names)
+    first_message = f"{current_date}\n{Stock_Number} Hisse"
+    bot.send_message(os.getenv("CHAT_ID"), first_message)
+    message = ""
     for stock_name in stock_names:
-        bot.send_message(os.getenv("CHAT_ID"), stock_name)
+        message += stock_name + "\n"    
+    bot.send_message(os.getenv("CHAT_ID"), stock_name)
         
         
 @bot.message_handler(commands=['help'])
