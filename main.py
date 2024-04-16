@@ -1,4 +1,3 @@
-from email import message
 import time
 import telebot
 import os 
@@ -18,25 +17,23 @@ fetcher = StockDataFetcher()
 bot = telebot.TeleBot(os.getenv("API_KEY"))
 
 def scheduled_job():
+    
     if not is_today_working_day():
         bot.send_message(os.getenv("CHAT_ID"), "Bugün tatil, iyi tatiller :)")
         return
+    
     current_date = time.strftime("%d/%m/%Y")
     stock_names = fetcher.fetch_data()
-    Stock_Number = len(stock_names)
-    first_message = f"{current_date}\n{Stock_Number} Hisse"
-    bot.send_message(os.getenv("CHAT_ID"), first_message)
-    message = ""
-    for stock_name in stock_names:
-        message += stock_name + "\n"    
-    bot.send_message(os.getenv("CHAT_ID"), stock_name)
-        
+    first_message = f"=================\n{current_date}\n{len(stock_names)} Hisse\n=================\n"
+    first_message += "\n".join(stock_names) 
+
+    bot.send_message(os.getenv("CHAT_ID"), parse_mode="Markdown", text=first_message )
         
 @bot.message_handler(commands=['help'])
 def send_welcome(message):
     print(message.chat.id)
-    bot.reply_to(message, "Merhaba, bu bot sana her akşam saat 8'de BİST'de goldencross'a başlayan hisseleri gösterir.")
-
+    bot.reply_to(message, "Merhaba, bu bot sana her akşam saat 8'de BİST'de goldencross'a başlayan hisseleri gösterir.")    
+        
 schedule.every().day.at("16:00").do(scheduled_job)
 
 def start_pooling():
