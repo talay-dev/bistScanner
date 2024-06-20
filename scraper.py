@@ -1,11 +1,9 @@
-import logging
 import requests
 import json
 
 
 class StockDataFetcher:
     def __init__(self):
-        logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s %(message)s")
         self.params = json.load(open("params.json"))
         self.url = "https://scanner.tradingview.com/global/scan"
         self.headers = {
