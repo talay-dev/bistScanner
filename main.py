@@ -52,8 +52,7 @@ class BotHandler:
                             minute=int(self.schedule_time[3:5]),
                             second=0) + difference).strftime("%H:%M")
 
-    @staticmethod
-    def start_scheduling():
+    def start_scheduling(self):
         while True:
             schedule.run_pending()
             time.sleep(1)
