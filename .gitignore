@@ -1,1 +1,6 @@
 .env
+*.log
+*.ipynb
+.idea/
+__pycache__/
+*.json
